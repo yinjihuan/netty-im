@@ -18,6 +18,10 @@
 	
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.cxytiandi</groupId>
 			<artifactId>netty-im-core</artifactId>
 		</dependency>

@@ -1,5 +1,7 @@
 package com.netty.im.client;
 
+import java.util.UUID;
+
 import com.netty.im.core.message.Message;
 
 import io.netty.channel.Channel;
@@ -14,6 +16,7 @@ public class ImClientApp {
 		int port = 2222;
 		Channel channel = new ImConnection().connect(host, port);
 		Message message = new Message();
+		message.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		message.setContent("hello yinjihuan");
 		channel.writeAndFlush(message);
 	}
