@@ -13,7 +13,7 @@ public class ImServerHandler extends ChannelInboundHandlerAdapter {
 		if (ConnectionPool.getChannel(message.getId()) == null) {
 			ConnectionPool.putChannel(message.getId(), ctx);
 		}
-		System.err.println("server:" + message.getContent());
+		System.err.println("server:" + message.getId());
 		//ctx.writeAndFlush(message);
     }
 

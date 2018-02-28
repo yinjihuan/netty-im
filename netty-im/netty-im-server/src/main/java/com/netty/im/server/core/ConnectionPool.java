@@ -1,5 +1,7 @@
 package com.netty.im.server.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,6 +30,15 @@ public class ConnectionPool {
 	
 	public static Set<String> getClients() {
 		return pool.keySet();
+	}
+	
+	public static List<ChannelHandlerContext> getChannels() {
+		List<ChannelHandlerContext> channels = new ArrayList<>();
+		Set<String> keys = pool.keySet();
+		for (String key : keys) {
+			channels.add(pool.get(key));
+		}
+		return channels;
 	}
 	
 }
