@@ -16,10 +16,12 @@ public class ImClientApp {
 		String host = "127.0.0.1";
 		int port = 2222;
 		Channel channel = new ImConnection().connect(host, port);
-		/*Message message = new Message();
+		//对象传输数据
+		Message message = new Message();
 		message.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		message.setContent("hello yinjihuan");
-		channel.writeAndFlush(message);*/
-		channel.writeAndFlush("yinjihuan");
+		channel.writeAndFlush(message);
+		//字符串传输数据
+		//channel.writeAndFlush("yinjihuan");
 	}
 }

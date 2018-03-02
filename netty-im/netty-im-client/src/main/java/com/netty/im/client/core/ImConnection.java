@@ -39,12 +39,15 @@ public class ImConnection {
 				public void initChannel(SocketChannel ch) throws Exception {
 					//ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
 					//ch.pipeline().addLast("frameEncoder", new LengthFieldPrepender(4));
-					//ch.pipeline().addLast("decoder", new MessageDecoder());
-					//ch.pipeline().addLast("encoder", new MessageEncoder());
-					//ch.pipeline().addLast(new PoHandler());
-					ch.pipeline().addLast("decoder", new StringDecoder());
+					//实体类传输数据，jdk序列化
+					ch.pipeline().addLast("decoder", new MessageDecoder());
+					ch.pipeline().addLast("encoder", new MessageEncoder());
+					ch.pipeline().addLast(new ClientPoHandler());
+					
+					//字符串传输数据
+					/*ch.pipeline().addLast("decoder", new StringDecoder());
 					ch.pipeline().addLast("encoder", new StringEncoder());
-					ch.pipeline().addLast(new ClientStringHandler());
+					ch.pipeline().addLast(new ClientStringHandler());*/
 				}
 			});
 

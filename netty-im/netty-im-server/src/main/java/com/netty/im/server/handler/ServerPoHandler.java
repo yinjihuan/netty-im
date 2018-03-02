@@ -14,7 +14,7 @@ public class ServerPoHandler extends ChannelInboundHandlerAdapter {
 			ConnectionPool.putChannel(message.getId(), ctx);
 		}
 		System.err.println("server:" + message.getId());
-		//ctx.writeAndFlush(message);
+		ctx.writeAndFlush(message);
     }
 
     @Override
