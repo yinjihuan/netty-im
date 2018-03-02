@@ -1,5 +1,7 @@
-package com.netty.im.client;
+package com.netty.im.client.core;
 
+import com.netty.im.client.handler.ClientPoHandler;
+import com.netty.im.client.handler.ClientStringHandler;
 import com.netty.im.core.message.MessageDecoder;
 import com.netty.im.core.message.MessageEncoder;
 import io.netty.bootstrap.Bootstrap;
@@ -13,6 +15,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 public class ImConnection {
 
@@ -33,21 +37,21 @@ public class ImConnection {
 			b.handler(new ChannelInitializer<SocketChannel>() {
 				@Override
 				public void initChannel(SocketChannel ch) throws Exception {
-					ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
-					ch.pipeline().addLast("frameEncoder", new LengthFieldPrepender(4));
-					ch.pipeline().addLast("decoder", new MessageDecoder());
-					ch.pipeline().addLast("encoder", new MessageEncoder());
-					ch.pipeline().addLast(new ImClientHandler());
+					//ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
+					//ch.pipeline().addLast("frameEncoder", new LengthFieldPrepender(4));
+					//ch.pipeline().addLast("decoder", new MessageDecoder());
+					//ch.pipeline().addLast("encoder", new MessageEncoder());
+					//ch.pipeline().addLast(new PoHandler());
+					ch.pipeline().addLast("decoder", new StringDecoder());
+					ch.pipeline().addLast("encoder", new StringEncoder());
+					ch.pipeline().addLast(new ClientStringHandler());
 				}
 			});
 
 			ChannelFuture f = b.connect(host, port).sync();
 			channel = f.channel();
-			//channel.closeFuture().sync();
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			//workerGroup.shutdownGracefully();
 		}
 	}
 	

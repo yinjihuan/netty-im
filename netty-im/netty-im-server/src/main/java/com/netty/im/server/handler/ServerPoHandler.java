@@ -5,7 +5,7 @@ import com.netty.im.server.core.ConnectionPool;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ImServerHandler extends ChannelInboundHandlerAdapter {
+public class ServerPoHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {

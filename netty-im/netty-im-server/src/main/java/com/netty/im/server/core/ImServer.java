@@ -1,8 +1,6 @@
 package com.netty.im.server.core;
 
-import com.netty.im.core.message.MessageDecoder;
-import com.netty.im.core.message.MessageEncoder;
-import com.netty.im.server.handler.ImServerHandler;
+import com.netty.im.server.handler.ServerStringHandler;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -14,6 +12,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 /**
  * IM服务启动
@@ -32,11 +32,14 @@ public class ImServer {
         		.childHandler(new ChannelInitializer<SocketChannel>() { 
                     @Override
                     public void initChannel(SocketChannel ch) throws Exception {
-                    	ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
-    					ch.pipeline().addLast("frameEncoder", new LengthFieldPrepender(4));
-    					ch.pipeline().addLast("decoder", new MessageDecoder());
-    					ch.pipeline().addLast("encoder", new MessageEncoder());
-                    	ch.pipeline().addLast(new ImServerHandler());
+                    	//ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
+    					//ch.pipeline().addLast("frameEncoder", new LengthFieldPrepender(4));
+    					//ch.pipeline().addLast("decoder", new MessageDecoder());
+    					//ch.pipeline().addLast("encoder", new MessageEncoder());
+                    	//ch.pipeline().addLast(new ServerPoHandler());
+    					ch.pipeline().addLast("decoder", new StringDecoder());
+    					ch.pipeline().addLast("encoder", new StringEncoder());
+    					ch.pipeline().addLast(new ServerStringHandler());
                     }
                 })
         		.option(ChannelOption.SO_BACKLOG, 128)

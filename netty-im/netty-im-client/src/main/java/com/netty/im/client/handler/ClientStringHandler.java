@@ -1,16 +1,18 @@
-package com.netty.im.client;
-
-import com.netty.im.core.message.Message;
+package com.netty.im.client.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ImClientHandler extends ChannelInboundHandlerAdapter {
+/**
+ * 当编解码器为字符串时用来接收数据
+ * @author yinjihuan
+ *
+ */
+public class ClientStringHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		Message message = (Message) msg;
-		System.out.println("client:" + message.getContent());
+		System.out.println("client:" + msg.toString());
 	}
 
 	@Override

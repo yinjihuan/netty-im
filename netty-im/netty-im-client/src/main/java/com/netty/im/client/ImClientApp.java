@@ -2,6 +2,7 @@ package com.netty.im.client;
 
 import java.util.UUID;
 
+import com.netty.im.client.core.ImConnection;
 import com.netty.im.core.message.Message;
 
 import io.netty.channel.Channel;
@@ -15,9 +16,10 @@ public class ImClientApp {
 		String host = "127.0.0.1";
 		int port = 2222;
 		Channel channel = new ImConnection().connect(host, port);
-		Message message = new Message();
+		/*Message message = new Message();
 		message.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		message.setContent("hello yinjihuan");
-		channel.writeAndFlush(message);
+		channel.writeAndFlush(message);*/
+		channel.writeAndFlush("yinjihuan");
 	}
 }
