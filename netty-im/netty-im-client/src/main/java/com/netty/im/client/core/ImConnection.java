@@ -2,6 +2,8 @@ package com.netty.im.client.core;
 
 import com.netty.im.client.handler.ClientPoHandler;
 import com.netty.im.client.handler.ClientStringHandler;
+import com.netty.im.core.message.KryoDecoder;
+import com.netty.im.core.message.KryoEncoder;
 import com.netty.im.core.message.MessageDecoder;
 import com.netty.im.core.message.MessageEncoder;
 import io.netty.bootstrap.Bootstrap;
@@ -40,8 +42,10 @@ public class ImConnection {
 					//ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
 					//ch.pipeline().addLast("frameEncoder", new LengthFieldPrepender(4));
 					//实体类传输数据，jdk序列化
-					ch.pipeline().addLast("decoder", new MessageDecoder());
-					ch.pipeline().addLast("encoder", new MessageEncoder());
+					/*ch.pipeline().addLast("decoder", new MessageDecoder());
+					ch.pipeline().addLast("encoder", new MessageEncoder());*/
+					ch.pipeline().addLast("decoder", new KryoDecoder());
+					ch.pipeline().addLast("encoder", new KryoEncoder());
 					ch.pipeline().addLast(new ClientPoHandler());
 					
 					//字符串传输数据
