@@ -1,11 +1,8 @@
 package com.netty.im.client.core;
 
-import com.netty.im.client.handler.ClientPoHandler;
-import com.netty.im.client.handler.ClientStringHandler;
-import com.netty.im.core.message.KryoDecoder;
-import com.netty.im.core.message.KryoEncoder;
-import com.netty.im.core.message.MessageDecoder;
-import com.netty.im.core.message.MessageEncoder;
+import com.netty.im.client.handler.ClientPoHandlerProto;
+import com.netty.im.core.message.MessageProto;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -15,10 +12,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
 public class ImConnection {
 
@@ -44,9 +39,24 @@ public class ImConnection {
 					//实体类传输数据，jdk序列化
 					/*ch.pipeline().addLast("decoder", new MessageDecoder());
 					ch.pipeline().addLast("encoder", new MessageEncoder());*/
-					ch.pipeline().addLast("decoder", new KryoDecoder());
-					ch.pipeline().addLast("encoder", new KryoEncoder());
-					ch.pipeline().addLast(new ClientPoHandler());
+					// 使用框架自带的对象编解码器
+                	/*ch.pipeline().addLast(
+                			new ObjectDecoder(
+                					ClassResolvers.cacheDisabled(
+                							this.getClass().getClassLoader()
+                					)
+                			)
+                	);
+                	ch.pipeline().addLast(new ObjectEncoder());*/
+					// 实体类传输数据，protobuf序列化
+                	ch.pipeline().addLast("decoder",  
+                            new ProtobufDecoder(MessageProto.Message.getDefaultInstance()));  
+                	ch.pipeline().addLast("encoder",  
+                            new ProtobufEncoder());  
+                	ch.pipeline().addLast(new ClientPoHandlerProto());
+					/*ch.pipeline().addLast("decoder", new KryoDecoder());
+					ch.pipeline().addLast("encoder", new KryoEncoder());*/
+					//ch.pipeline().addLast(new ClientPoHandler());
 					
 					//字符串传输数据
 					/*ch.pipeline().addLast("decoder", new StringDecoder());
