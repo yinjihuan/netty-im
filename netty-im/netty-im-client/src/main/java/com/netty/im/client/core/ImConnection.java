@@ -65,7 +65,8 @@ public class ImConnection {
 				}
 			});
 
-			ChannelFuture f = b.connect(host, port).sync();
+			ChannelFuture f = b.connect(host, port);
+			f.addListener(new ConnectionListener());
 			channel = f.channel();
 		} catch(Exception e) {
 			e.printStackTrace();

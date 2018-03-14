@@ -13,10 +13,10 @@ import io.netty.channel.Channel;
  * @author yinjihuan
  */
 public class ImClientApp {
+	public static final String HOST = "127.0.0.1";
+	public static int PORT = 2222;
 	public static void main(String[] args) {
-		String host = "127.0.0.1";
-		int port = 2222;
-		Channel channel = new ImConnection().connect(host, port);
+		Channel channel = new ImConnection().connect(HOST, PORT);
 		String id = UUID.randomUUID().toString().replaceAll("-", "");
 		// protobuf
 		MessageProto.Message message = MessageProto.Message.newBuilder().setId(id).setContent("hello yinjihuan").build();
