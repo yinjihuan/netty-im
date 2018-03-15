@@ -14,7 +14,11 @@ public class ServerPoHandlerProto extends ChannelInboundHandlerAdapter {
 			ConnectionPool.putChannel(message.getId(), ctx);
 		}
 		System.err.println("server:" + message.getId());
-		ctx.writeAndFlush(message);
+		// ping
+		if (message.getType() == 1) {
+			ctx.writeAndFlush(message);
+		}
+		
     }
 
     @Override

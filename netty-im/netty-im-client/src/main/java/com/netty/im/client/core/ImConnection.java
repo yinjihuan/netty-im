@@ -1,5 +1,7 @@
 package com.netty.im.client.core;
 
+import java.util.concurrent.TimeUnit;
+
 import com.netty.im.client.handler.ClientPoHandlerProto;
 import com.netty.im.core.message.MessageProto;
 
@@ -14,6 +16,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 
 public class ImConnection {
 
@@ -49,6 +52,7 @@ public class ImConnection {
                 	);
                 	ch.pipeline().addLast(new ObjectEncoder());*/
 					// 实体类传输数据，protobuf序列化
+					ch.pipeline().addLast("ping", new IdleStateHandler(60, 20, 60 * 10, TimeUnit.SECONDS));
                 	ch.pipeline().addLast("decoder",  
                             new ProtobufDecoder(MessageProto.Message.getDefaultInstance()));  
                 	ch.pipeline().addLast("encoder",  

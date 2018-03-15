@@ -37,6 +37,11 @@ public final class MessageProto {
      */
     com.google.protobuf.ByteString
         getContentBytes();
+
+    /**
+     * <code>int32 type = 3;</code>
+     */
+    int getType();
   }
   /**
    * Protobuf type {@code Message}
@@ -53,6 +58,7 @@ public final class MessageProto {
     private Message() {
       id_ = "";
       content_ = "";
+      type_ = 0;
     }
 
     @java.lang.Override
@@ -96,6 +102,11 @@ public final class MessageProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               content_ = s;
+              break;
+            }
+            case 24: {
+
+              type_ = input.readInt32();
               break;
             }
           }
@@ -190,6 +201,15 @@ public final class MessageProto {
       }
     }
 
+    public static final int TYPE_FIELD_NUMBER = 3;
+    private int type_;
+    /**
+     * <code>int32 type = 3;</code>
+     */
+    public int getType() {
+      return type_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -208,6 +228,9 @@ public final class MessageProto {
       if (!getContentBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, content_);
       }
+      if (type_ != 0) {
+        output.writeInt32(3, type_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -221,6 +244,10 @@ public final class MessageProto {
       }
       if (!getContentBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, content_);
+      }
+      if (type_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, type_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -242,6 +269,8 @@ public final class MessageProto {
           .equals(other.getId());
       result = result && getContent()
           .equals(other.getContent());
+      result = result && (getType()
+          == other.getType());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -257,6 +286,8 @@ public final class MessageProto {
       hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + CONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getContent().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getType();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -390,6 +421,8 @@ public final class MessageProto {
 
         content_ = "";
 
+        type_ = 0;
+
         return this;
       }
 
@@ -414,6 +447,7 @@ public final class MessageProto {
         MessageProto.Message result = new MessageProto.Message(this);
         result.id_ = id_;
         result.content_ = content_;
+        result.type_ = type_;
         onBuilt();
         return result;
       }
@@ -462,6 +496,9 @@ public final class MessageProto {
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
           onChanged();
+        }
+        if (other.getType() != 0) {
+          setType(other.getType());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -627,6 +664,32 @@ public final class MessageProto {
         onChanged();
         return this;
       }
+
+      private int type_ ;
+      /**
+       * <code>int32 type = 3;</code>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>int32 type = 3;</code>
+       */
+      public Builder setType(int value) {
+        
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 type = 3;</code>
+       */
+      public Builder clearType() {
+        
+        type_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -690,8 +753,9 @@ public final class MessageProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rMessage.proto\"&\n\007Message\022\n\n\002id\030\001 \001(\t\022\017" +
-      "\n\007content\030\002 \001(\tB\016B\014MessageProtob\006proto3"
+      "\n\rMessage.proto\"4\n\007Message\022\n\n\002id\030\001 \001(\t\022\017" +
+      "\n\007content\030\002 \001(\t\022\014\n\004type\030\003 \001(\005B\016B\014Message" +
+      "Protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -710,7 +774,7 @@ public final class MessageProto {
     internal_static_Message_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Message_descriptor,
-        new java.lang.String[] { "Id", "Content", });
+        new java.lang.String[] { "Id", "Content", "Type", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
