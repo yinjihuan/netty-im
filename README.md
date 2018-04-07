@@ -1,6 +1,6 @@
 # netty-im
 
-源码对应相关技术文章：
+本来想用Netty做一个推送相关的案例，后面变成了Netty相关的代码集合，源码对应相关技术文章：
 
 - [高性能NIO框架Netty入门篇](http://cxytiandi.com/blog/detail/17345)
 - [高性能NIO框架Netty-对象传输](http://cxytiandi.com/blog/detail/17403)
