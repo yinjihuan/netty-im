@@ -8,6 +8,7 @@
 - [高性能NIO框架Netty-整合Protobuf高性能数据传输](http://cxytiandi.com/blog/detail/17469)
 - [高性能NIO框架Netty-Netty4自带编解码器详解](http://cxytiandi.com/blog/detail/17547)
 - [Netty粘包拆包解决方案](http://cxytiandi.com/blog/detail/17641)
+- [Netty 断线重连解决方案](http://cxytiandi.com/blog/detail/18044)
 
 # 作者
 - 尹吉欢 1304489315@qq.com
